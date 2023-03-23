@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Menu de Pedidos</title>
+    <style>
+      body {
+  font-family: 'Open Sans', sans-serif;
+  background-color: #f5f5f5;
+  color: #333;
+}
+
+h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.5rem;
+  margin-top: 2rem;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+li {
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+}
+
+label {
+  display: flex;
+  align-items: center;
+  margin-right: 1rem;
+}
+
+input[type=checkbox] {
+  margin-right: 0.5rem;
+}
+
+input[type=number] {
+  width: 3rem;
+  margin-left: 1rem;
+}
+
+button[type=submit] {
+  background-color: #8dc891;
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  font-size: 1.2rem;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  margin-top: 1rem;
+}
+
+button[type=submit]:hover {
+  background-color: #70a77c;
+}
+
+    </style>
+  </head>
+  <body>
+    <h1>Bem-vindo ao nosso cardápio! Por favor, escolha os itens que deseja pedir:</h1>
+    <form id="order-form">
+      <ul>
+        <li>
+          <label>
+            <input type="checkbox" name="item-1" value="Hambúrguer">
+            Hambúrguer - R$10
+          </label>
+          <input type="number" name="quantity-1" min="0">
+        </li>
+        <li>
+          <label>
+            <input type="checkbox" name="item-2" value="Batata Frita">
+            Batata Frita - R$5
+          </label>
+          <input type="number" name="quantity-2" min="0">
+        </li>
+        <li>
+          <label>
+            <input type="checkbox" name="item-3" value="Refrigerante">
+            Refrigerante - R$3
+          </label>
+          <input type="number" name="quantity-3" min="0">
+        </li>
+      </ul>
+      <button type="submit">Fazer Pedido</button>
+    </form>
+    <script>
+      const form = document.getElementById("order-form");
+
+      form.addEventListener("submit", (event) => {
+        event.preventDefault();
+
+        const order = {};
+
+        for (let i = 1; i <= 3; i++) {
+          const checkbox = document.querySelector(`[name="item-${i}"]:checked`);
+          const quantity = document.querySelector(`[name="quantity-${i}"]`).value;
+
+          if (checkbox) {
+            order[checkbox.value] = parseInt(quantity);
+          }
+        }
+
+        // Enviar a ordem para o servidor aqui
+        console.log(order);
+      });
+    </script>
+  </body>
+</html>
